@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--需要映射的package 地址-->
+<mapper namespace="com.team1.cs5500.mapper.ScenarioMapper">
+    <!--这里写所有的sql语句, id就是namespace里的方法名字, resultType返回类型-->
+    <select id="selectAllScenario" resultType="com.team1.cs5500.bean.Scenario">
+        select
+            s.scenarioId
+            , s.trafficFactorId
+            , s.startDate
+            , s.endDate
+            , s.scenariodescription
+            , count(*) numberOfRecords
+        from
+            scenariotable s inner join customerVisit v on s.scenarioId = v.scenarioId
+        group by
+            s.scenarioId
+            , s.trafficFactorId
+            , s.startDate
+            , s.endDate
+            , s.scenariodescription
+    </select>
+
+    <select id="selectVisitByScenarioId" resultType="com.team1.cs5500.bean.CustomerVisit">
+        select
+        cv.customervisitId
+        , wt.WeatherDescription
+        , ct.CustomerDescription
+        , ht.HolidayDescription
+        , cv.arrivalTime
+        , cv.minuteShopping
+        , cv.scenarioId
+        from
+        CustomerVisit cv inner join WeatherType wt
+        on cv.WeatherTypeID = wt.WeatherTypeID
+        inner join CustomerType ct
+        on cv.customerTypeId = ct.customerTypeId
+        inner join HolidayType ht
+        on cv.holidayTypeId = ht.holidayTypeId
+        where
+        cv.scenarioId = #{scenarioId}
+        order by
+        cv.arrivalTime;
+    </select>
+
+
+    <select id="selectVisitByDate" resultType="com.team1.cs5500.bean.CustomerVisit">
+        select
+        cv.customervisitId
+        , wt.WeatherDescription
+        , ct.CustomerDescription
+        , ht.HolidayDescription
+        , cv.arrivalTime
+        , cv.scenarioId
+        , cv.minuteShopping
+        from
+        CustomerVisit cv inner join WeatherType wt
+        on cv.WeatherTypeID = wt.WeatherTypeID
+        inner join CustomerType ct
+        on cv.customerTypeId = ct.customerTypeId
+        inner join HolidayType ht
+        on cv.holidayTypeId = ht.holidayTypeId
+        where
+            cv.scenarioId = #{scenarioId}
+            and Date(cv.ArrivalTime) = #{date}
+        order by
+        cv.arrivalTime;
+    </select>
+
+    <select id="selectVisitByCustomerId" resultType="com.team1.cs5500.bean.CustomerVisit">
+        select
+        cv.customervisitId
+        , wt.WeatherDescription
+        , ct.CustomerDescription
+        , ht.HolidayDescription
+        , cv.arrivalTime
+        , cv.scenarioId
+        , cv.minuteShopping
+        from
+        CustomerVisit cv inner join WeatherType wt
+        on cv.WeatherTypeID = wt.WeatherTypeID
+        inner join CustomerType ct
+        on cv.customerTypeId = ct.customerTypeId
+        inner join HolidayType ht
+        on cv.holidayTypeId = ht.holidayTypeId
+        where
+        cv.scenarioId = #{scenarioId}
+        and cv.customervisitId = #{customerId}
+        order by
+        cv.arrivalTime;
+    </select>
+
+</mapper>

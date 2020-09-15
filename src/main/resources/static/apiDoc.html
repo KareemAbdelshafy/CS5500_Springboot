@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>api Document</title>
+</head>
+<body>
+<h1>api Doc:</h1>
+<hr>
+<div>
+    <h4>1.</h4>
+    <p1>RESOURCE NAME: list scenarios<br>
+        HTTP METHOD: GET<br>
+        URL Structure: /api/v1/scenario<br>
+    </p1>
+    <b>Example output:</b>
+    <p1>
+        <ul>
+            <li>
+                [{"scenarioID":1,"trafficFactorID":1,"startDate":"2020-05-23","endDate":"2020-05-27","scenarioDescription":"Original Factors, May23-May27","numberOfRecords":13960},
+            </li>
+            <li>
+                {"scenarioID":2,"trafficFactorID":1,"startDate":"2020-07-04","endDate":"2020-07-04","scenarioDescription":"Original Factors, July4","numberOfRecords":800}]
+            </li>
+        </ul>
+    </p1>
+</div>
+<br>
+
+<div>
+    <h4>2.</h4>
+    <p1>RESOURCE NAME: get scenario by id<br>
+        HTTP METHOD: GET<br>
+        URL Structure: /api/v1/scenario/{scenarioID}<br>
+    </p1>
+    <b>Validations:</b>
+    <ul>
+        <li>Scenario id is an integer</li>
+    </ul>
+    <b>Example output:</b>
+    <p1>
+        <ul>
+            <li>
+                [{"scenarioID":1,"trafficFactorID":1,"startDate":"2020-05-23","endDate":"2020-05-27","scenarioDescription":"Original Factors, May23-May27","numberOfRecords":13960},
+            </li>
+            <li>
+                {"scenarioID":2,"trafficFactorID":1,"startDate":"2020-07-04","endDate":"2020-07-04","scenarioDescription":"Original Factors, July4","numberOfRecords":800}]
+            </li>
+        </ul>
+    </p1>
+</div>
+
+</body>
+</html>
